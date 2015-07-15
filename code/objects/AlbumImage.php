@@ -14,7 +14,7 @@
 
 		private static $has_one = array(
 			'Album' => 'AlbumPage',
-			'Image' => 'CoreImage'
+			'Image' => 'Image'
 		);
 
 		private static $has_many = array();
