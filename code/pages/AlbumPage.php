@@ -28,42 +28,44 @@
 			}
 			$config->addComponent(new GridFieldSortableRows('Sort'));
 			$config->removeComponentsByType('GridFieldAddExistingAutocompleter');
+			$config->removeComponentsByType('GridFieldPaginator');
+			$config->removeComponentsByType('GridFieldPageCount');
 			$gridField = new GridField('Images', 'Album images', $this->Images()->sort('Sort'), $config);
 			$fields->addFieldToTab('Root.Images', $gridField);
 
 			$this->extend('updateCMSFields', $fields);
 			return $fields;
 		}
-		
+
 		/**
 		 * Produce the correct breadcrumb trail for use on the AlbumPage
 		 * The breadcrumb function by default skips pages that have
 		 * ShowInMenus unchecked
 		 */
-		public function Breadcrumbs($maxDepth = 20, $unlinked = false, $stopAtPageType = false, $showHidden = false) 
+		public function Breadcrumbs($maxDepth = 20, $unlinked = false, $stopAtPageType = false, $showHidden = false)
 		{
 			$page = Controller::curr()->Parent;
 			if($page->ShowInMenus==false){
 				$showHidden = true;
 			}
 			$pages = array();
-	
+
 			$pages[] = $this;
-	
+
 			while(
-				$page  
-	 			&& (!$maxDepth || count($pages) < $maxDepth) 
+				$page
+	 			&& (!$maxDepth || count($pages) < $maxDepth)
 	 			&& (!$stopAtPageType || $page->ClassName != $stopAtPageType)
 	 		) {
-				if($showHidden || $page->ShowInMenus || ($page->ID == $this->ID)) { 
+				if($showHidden || $page->ShowInMenus || ($page->ID == $this->ID)) {
 					$pages[] = $page;
 				}
-	
+
 				$page = $page->Parent;
 			}
-	
+
 			$template = new SSViewer('BreadcrumbsTemplate');
-	
+
 			return $template->process($this->customise(new ArrayData(array(
 				'Pages' => new ArrayList(array_reverse($pages))
 			))));
