@@ -1,0 +1,24 @@
+{
+  "name": "dynamic/core-gallery",
+  "description": "Image Gallery for Dynamic Core",
+  "keywords": [
+    "silverstripe",
+    "module"
+  ],
+  "license": "BSD-3-Clause",
+  "type": "silverstripe-module",
+  "require": {
+    "silverstripe/framework": "^3.1",
+        "dynamic/core": "^2.0"
+  },
+  "authors": [
+    {
+      "name": "Dynamic Inc",
+      "homepage": "http://www.dynamicagency.com",
+      "email": "dev@dynamicagency.com"
+    }
+  ],
+  "extra": {
+    "installer-name": "core-gallery"
+  }
+}
